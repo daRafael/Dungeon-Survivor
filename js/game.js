@@ -1,16 +1,28 @@
 class Game {
   constructor() {
     this.titleScreen = document.querySelector('.title-screen');
-    this.gameScreen = document.querySelector('.game-screen');
-    this.player = new Player(
+    this.gameScreen = document.querySelector('.map');
+    this.player = new Player (
       this.gameScreen,
-      30,
-      40
-    )
+      500,
+      500
+    );
+    this.IntervalId;
+    this.gameLoopFrenquency = Math.round(1000/60);
   }
 
   start() {
-    this.titleScreen.style.display = 'none'
-    this.gameScreen.style.display = 'flex';
+    this.gameIntervalId = setInterval(() => {
+      this.gameLoop();
+    }, this.gameLoopFrenquency);
+  }
+
+  gameLoop() {
+    this.update();
+    console.log('in the game loop')
+  }
+
+  update() {
+    this.player.move();
   }
 }
