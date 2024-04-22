@@ -30,13 +30,12 @@ class Player {
     //attack container
     this.collisionContainer.appendChild(this.attackContainer);
     this.attackContainer.style.position = 'absolute';
-  /*   this.attackContainer.style.display = 'none'; */
     this.attackContainer.style.border = '2px solid black';
     this.attackContainer.style.width = '65px';
     this.attackContainer.style.height = '25px';
     this.attackContainer.style.marginLeft = '90px';
-/*     this.attackPattern = this.attackContainer.style.display == 'block'
- */
+    this.attackContainer.style.display = 'none';
+    this.attackInterval = null; //IntervalID
   
 
 
@@ -55,14 +54,8 @@ class Player {
 
     this.frameX = 0;
     this.gameFrame = 0;
-    this.staggerFrames = 10;
+    this.staggerFrames = 15;
   };
-
-  attack() {
-    setTimeout(() => {
-      this.attackContainer.style.display = 'block'
-    },1000)
-  }
 
 
   move () {
@@ -76,6 +69,41 @@ class Player {
     this.collisionContainer.style.top = `${this.top}px`;
   }
 
+  //attack Pattern
+  startAttackInterval() {
+    this.attackInterval = setInterval(() => {
+      this.showAttackContainer();
+      setTimeout(() => {
+        this.hideAttackContainer();
+      }, 200);
+    }, 2000);
+  }
+
+  showAttackContainer() {
+    this.attackContainer.style.display = 'block';
+  }
+
+  hideAttackContainer() {
+    this.attackContainer.style.display = 'none';
+  }
+
+  //attack collision logic
+  didAttackHit(enemy) {
+    const attackRect = this.attackContainer.getBoundingClientRect();
+    const enemyRect = enemy.collisionContainer.getBoundingClientRect();
+
+    if (
+      attackRect.left < enemyRect.right &&
+      attackRect.right > enemyRect.left &&
+      attackRect.top < enemyRect.bottom &&
+      attackRect.bottom > enemyRect.top
+    ) {
+      console.log('hit!')
+    }
+  }
+
+
+
   //collision with player logic
 
   didPlayerCollide(enemy) {
@@ -88,7 +116,7 @@ class Player {
       playerRect.top < enemyRect.bottom &&
       playerRect.bottom > enemyRect.top
     ) {
-      console.log('crash!')
+
     }
   }
 

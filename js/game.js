@@ -17,6 +17,8 @@ class Game {
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrenquency);
+
+    this.player.startAttackInterval();
   }
 
   gameLoop() {
@@ -36,48 +38,39 @@ class Game {
     this.enemiesTop.forEach((enemy) => {
       enemy.moveEnemy(this.player.top, this.player.left); //follow function
       this.player.didPlayerCollide(enemy); // player collision function
+      this.player.didAttackHit(enemy); // attack collison function
+      enemy.animationWalk();
     });
 
-    setInterval(() => {
-      this.player.attackContainer.style.display = 'none'
-      this.player.attack();
-    },2000);
 
 
 
-
-    //this.didEnemiesCollide();
+    this.didEnemiesCollide();
   }
 
-  /* didEnemiesCollide() {
+  didEnemiesCollide() {
 
      for(let i = 0; i < this.enemiesTop.length; i++) {
       const enemy1 = this.enemiesTop[i];
-      for(let j = this.enemiesTop.length -1; j > 0; j--) {
+      for(let j = i + 1; j < this.enemiesTop.length; j++) {
         const enemy2 = this.enemiesTop[j];
-
         const enemy1Rect = enemy1.collisionContainer.getBoundingClientRect();
         const enemy2Rect = enemy2.collisionContainer.getBoundingClientRect();
 
-        if(enemy1Rect.left < enemy2Rect.right) {
-          enemy2.left -= 0.5;
-          enemy1.left += 0.5;
-        }
-        else if (enemy1Rect.right > enemy2Rect.left) {
-          enemy1.left -= 0.5;
-          enemy2.left += 0.5;
-        }
-        else if (enemy1Rect.top < enemy2Rect.bottom) {
-          enemy1.top += 0.5;
-          enemy2.top -= 0.5
-        }
-        else if (enemy1Rect.bottom > enemy2Rect.top) {
-          enemy1.top -= 0.5;
-          enemy2.top += 0.5;
+        if (
+          enemy1Rect.left < enemy2Rect.right &&
+          enemy1Rect.right > enemy2Rect.left &&
+          enemy1Rect.top < enemy2Rect.bottom &&
+          enemy1Rect.bottom > enemy2Rect.top
+        )
+        {
+          enemy1.left += 0.2;
+          enemy2.left -= 0.2;
+
         }
       }
     }
-  } */
+  }
 
 
 }
