@@ -6,28 +6,44 @@ class Player {
 
 
     this.collisionContainer = document.createElement('div');
+    this.attackContainer = document.createElement('div');
     this.canvas = document.createElement('canvas');
 
+
     //collision container
+    this.gameScreen.appendChild(this.collisionContainer);
     this.collisionContainer.style.position = 'absolute';
     this.collisionContainer.style.display = 'flex';
     this.collisionContainer.style.justifyContent = 'center';
     this.collisionContainer.style.alignItems = 'center';
-    this.collisionContainer.style.width = '20px';
+    this.collisionContainer.style.width = '15px';
     this.collisionContainer.style.height = '30px'
     this.collisionContainer.style.border = '1px solid black'
 
     this.collisionContainer.style.left = `${left}px`;
     this.collisionContainer.style.top = `${top}px`;
-    this.gameScreen.appendChild(this.collisionContainer);
+    
 
     this.directionX = 0;
     this.directionY = 0;
 
+    //attack container
+    this.collisionContainer.appendChild(this.attackContainer);
+    this.attackContainer.style.position = 'absolute';
+  /*   this.attackContainer.style.display = 'none'; */
+    this.attackContainer.style.border = '2px solid black';
+    this.attackContainer.style.width = '65px';
+    this.attackContainer.style.height = '25px';
+    this.attackContainer.style.marginLeft = '90px';
+/*     this.attackPattern = this.attackContainer.style.display == 'block'
+ */
+  
+
+
+
     //canvas element for animations
     this.collisionContainer.appendChild(this.canvas);
     this.ctx = this.canvas.getContext('2d');
-    this.collisionContainer.style.position = 'absolute';
     this.canvas.style.width = `64px`;
     this.canvas.style.height = `64px`;
     this.canvasWidth = this.canvas.width = 64;
@@ -39,8 +55,15 @@ class Player {
 
     this.frameX = 0;
     this.gameFrame = 0;
-    this.staggerFrames = 15;
+    this.staggerFrames = 10;
   };
+
+  attack() {
+    setTimeout(() => {
+      this.attackContainer.style.display = 'block'
+    },1000)
+  }
+
 
   move () {
     this.left += this.directionX;
@@ -53,11 +76,21 @@ class Player {
     this.collisionContainer.style.top = `${this.top}px`;
   }
 
+  //collision with player logic
 
+  didPlayerCollide(enemy) {
+    const playerRect = this.collisionContainer.getBoundingClientRect();
+    const enemyRect = enemy.collisionContainer.getBoundingClientRect();
 
-
-
-
+    if (
+      playerRect.left < enemyRect.right &&
+      playerRect.right > enemyRect.left &&
+      playerRect.top < enemyRect.bottom &&
+      playerRect.bottom > enemyRect.top
+    ) {
+      console.log('crash!')
+    }
+  }
 
 
   //animations for player character

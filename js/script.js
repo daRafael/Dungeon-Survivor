@@ -34,7 +34,7 @@ window.onload = () => {
     }
   };
 
-  game.player.animationRun()
+  game.player.animationIdle()
 
   window.addEventListener('keydown', handleKeyDown);
 
