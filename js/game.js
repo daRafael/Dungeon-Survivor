@@ -1,32 +1,64 @@
 class Game {
   constructor() {
     this.titleScreen = document.querySelector('.title-screen');
-    this.gameScreen = document.querySelector('.map');
+    this.gameScreen = document.querySelector('.camera');
+    this.map = document.querySelector('.map');
+    this.timer = document.querySelector('.timer');
+
+    // Player iteration
     this.player = new Player (
-      this.gameScreen,
+      this.map,
       500,
       500,
       100
     );
+
     this.IntervalId;
     this.gameLoopFrenquency = Math.round(1000/60);
-
+    //enemies Array
     this.enemies = [];
-
-
-
+    //timer
+    this.timerID;
+    this.timerCounter = 0;
+    //GAME OVER
+    this.gameOver = false;
   }
 
   start() {
+    this.titleScreen.style.display = 'none';
+    this.gameScreen.style.display = 'block';
+
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrenquency);
 
     this.player.startAttackInterval();
+    this.startTimer();
   }
 
   gameLoop() {
     this.update();
+
+    if(this.gameOver) {
+      this.stopTimer();
+    }
+  }
+
+  startTimer() {
+    this.timerID = setInterval(() => {
+      ++this.timerCounter;
+      let minutes = Math.floor(this.timerCounter / 60);
+      let seconds = this.timerCounter % 60;
+      if(seconds < 10) {
+        this.timer.innerHTML = `0${minutes}:0${seconds}`
+      } else {
+        this.timer.innerHTML = `0${minutes}:${seconds}`
+      }
+    }, 1000);
+  }
+
+  stopTimer () {
+    clearInterval(this.timerID);
   }
 
   update() {
@@ -51,8 +83,17 @@ class Game {
           this.enemies.splice(this.enemies.indexOf(enemy), 1);
         }
       }
-
       enemy.animationWalk();// enemy animation
+
+      // VICTORY!
+      if(this.timerCounter === 300) {
+        this.endGameTimer();
+      }
+
+      //GAME OVER!
+      if(this.player.health <= 0) {
+        this.endGameHp();
+      }
     });
   }
 
@@ -87,7 +128,7 @@ class Game {
     //enemies spawning from top
     if (Math.random() > 0.98 && this.enemies.length < 30) {
       this.enemies.push(
-        new Enemy(this.gameScreen,
+        new Enemy(this.map,
           Math.floor(Math.random() * 1000),
           this.player.top - 300)); 
     }
@@ -95,11 +136,32 @@ class Game {
     if (Math.random() > 0.98 && this.enemies.length < 30) {
       this.enemies.push(
         new Enemy(
-          this.gameScreen,
+          this.map,
           Math.floor(Math.random() * 1000), 
           this.player.top + 300)); 
     }
   }
+
+
+  //End Game
+  endGameTimer() {
+    this.player.collisionContainer.remove();
+    this.enemies.forEach((enemy) => {
+      enemy.collisionContainer.remove();
+    });
+    this.gameOver = true;
+    this.map.style.display = 'none';
+  }
+
+  endGameHp() {
+    this.player.collisionContainer.remove();
+    this.timer.remove();
+    this.enemies.forEach((enemy) => {
+      enemy.collisionContainer.remove();
+    });
+    this.gameOver = true;
+  }
+
 
 
 }

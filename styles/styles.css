@@ -1,6 +1,7 @@
 html,
 body,
 main {
+  font-family: 'Jersey 10';
   height: 100%;
 }
 
@@ -8,6 +9,47 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.title-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  background-image: url('/images/title-screen/DungeonSurvivor.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 1000px;
+  height: 1000px;
+}
+
+.start-button {
+  margin-bottom: 60px;
+  margin-right: 10px;
+  padding: 50px 120px;
+  background-image: url('/images/start-button/45356.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.start-button:active{
+  padding: 45px 110px;
+}
+
+.camera {
+  display: none;
+  position: relative;
+}
+
+.timer {
+  position: absolute;
+  font-size: 30px;
+  color: white;
+  z-index: 1000;
+  top: 50px;
+  left: 500px
+  
 }
 
 .map {

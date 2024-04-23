@@ -1,6 +1,6 @@
 class Enemy {
-  constructor(gameScreen, left, top) {
-    this.gameScreen = gameScreen;
+  constructor(map, left, top) {
+    this.map = map;
     this.left = left;
     this.top = top;
 
@@ -18,7 +18,7 @@ class Enemy {
 
     this.collisionContainer.style.left = `${this.left}px`;
     this.collisionContainer.style.top = `${this.top}px`;
-    this.gameScreen.appendChild(this.collisionContainer);
+    this.map.appendChild(this.collisionContainer);
 
     this.directionX = 0;
     this.directionY = 0;

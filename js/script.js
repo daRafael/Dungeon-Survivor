@@ -1,10 +1,14 @@
 window.onload = () => {
   const startbutton = document.querySelector('.start-button');
-  let game;
+  let game = new Game();
 
-  game = new Game();
-  game.start();
-
+  startbutton.addEventListener('click', () => {
+    game.start();
+    console.log(game);
+    game.player.animationIdle();
+  });
+  
+  console.log(game)
   function handleKeyDown() {
     const key = event.key;
     const possibleKeystrokes = [
@@ -34,11 +38,7 @@ window.onload = () => {
     }
   };
 
-  game.player.animationRun();
-/*   game.player.animationAttack(); */
 
   window.addEventListener('keydown', handleKeyDown);
-
-
 
 }

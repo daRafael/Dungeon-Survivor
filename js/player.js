@@ -1,6 +1,6 @@
 class Player {
-  constructor(gameScreen, left, top, health) {
-    this.gameScreen = gameScreen;
+  constructor(map, left, top, health) {
+    this.map = map;
     this.left = left;
     this.top = top;
 
@@ -14,7 +14,7 @@ class Player {
 
 
     //collision container
-    this.gameScreen.appendChild(this.collisionContainer);
+    this.map.appendChild(this.collisionContainer);
     this.collisionContainer.style.position = 'absolute';
     this.collisionContainer.style.display = 'flex';
     this.collisionContainer.style.justifyContent = 'center';
@@ -88,6 +88,21 @@ class Player {
   move () {
     this.left += this.directionX;
     this.top += this.directionY;
+
+    //player within bounds of map
+    if (this.left <= 0) {
+      this.left = 0;
+    }
+    if(this.left >= 980) {
+      this.left = 980;
+    }
+    if(this.top <= 0) {
+      this.top = 0;
+    }
+    if(this.top >= 970) {
+      this.top = 970;
+    }
+
     this.updatePosition();
   }
 
