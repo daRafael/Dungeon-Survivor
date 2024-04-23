@@ -78,7 +78,4 @@ class Enemy {
 
     this.gameFrame++;
   }
-
-
-
 }

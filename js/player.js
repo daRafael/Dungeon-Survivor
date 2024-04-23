@@ -3,14 +3,22 @@ class Player {
     this.map = map;
     this.left = left;
     this.top = top;
-
-
+  
     this.collisionContainer = document.createElement('div');
     this.attackContainer = document.createElement('div');
     this.hpContainer = document.createElement('div');
     this.playerHp = document.createElement('div');
     this.canvasAttack = document.createElement('canvas');
     this.canvas = document.createElement('canvas');
+
+    this.map = document.querySelector('.map');
+
+    //camera
+    this.camera = document.querySelector('.camera');
+    this.cameraWidth = 500;
+    this.cameraHeight = 500;
+    this.camera.style.width = `${this.cameraWidth}px`;
+    this.camera.style.height = `${this.cameraHeight}px`;
 
 
     //collision container
@@ -109,6 +117,12 @@ class Player {
   updatePosition() {
     this.collisionContainer.style.left = `${this.left}px`;
     this.collisionContainer.style.top = `${this.top}px`;
+
+    const cameraLeft = this.left - (this.cameraWidth / 2) + (15 / 2);
+    const cameraTop = this.top - (this.cameraHeight / 2) + (30 / 2);
+
+    this.map.style.left = `-${cameraLeft}px`;
+    this.map.style.top = `-${cameraTop}px`;
   }
 
   updateHealthBar() {

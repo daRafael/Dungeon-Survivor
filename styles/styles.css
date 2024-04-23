@@ -1,7 +1,7 @@
 html,
 body,
 main {
-  font-family: 'Jersey 10';
+  font-family: 'VT323', monospace;
   height: 100%;
 }
 
@@ -9,6 +9,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgb(31, 31, 31);
 }
 
 .title-screen {
@@ -19,14 +20,15 @@ main {
   background-image: url('/images/title-screen/DungeonSurvivor.png');
   background-repeat: no-repeat;
   background-size: cover;
-  width: 1000px;
-  height: 1000px;
+  object-fit: cover;
+  width: 70%;
+  height: 70%;
 }
 
 .start-button {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   margin-right: 10px;
-  padding: 50px 120px;
+  padding: 20px 50px;
   background-image: url('/images/start-button/45356.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -34,12 +36,14 @@ main {
 }
 
 .start-button:active{
-  padding: 45px 110px;
+  padding: 15px 40px;
 }
 
 .camera {
   display: none;
   position: relative;
+  overflow: hidden;
+
 }
 
 .timer {
@@ -47,8 +51,8 @@ main {
   font-size: 30px;
   color: white;
   z-index: 1000;
-  top: 50px;
-  left: 500px
+  top: 10px;
+  left: 250px;
   
 }
 
@@ -59,11 +63,4 @@ main {
   height: 1000px;
   width: 1000px;
   position: relative;
-}
-
-.player {
-  width: 15px;
-  height: 18px;
-  overflow: hidden;
-  position: absolute;
 }

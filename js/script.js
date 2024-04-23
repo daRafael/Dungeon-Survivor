@@ -4,11 +4,9 @@ window.onload = () => {
 
   startbutton.addEventListener('click', () => {
     game.start();
-    console.log(game);
     game.player.animationIdle();
   });
-  
-  console.log(game)
+
   function handleKeyDown() {
     const key = event.key;
     const possibleKeystrokes = [
@@ -36,6 +34,7 @@ window.onload = () => {
               break;
       }
     }
+
   };
 
 
