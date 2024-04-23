@@ -1,5 +1,5 @@
 class Player {
-  constructor(gameScreen, left, top) {
+  constructor(gameScreen, left, top, health) {
     this.gameScreen = gameScreen;
     this.left = left;
     this.top = top;
@@ -7,6 +7,9 @@ class Player {
 
     this.collisionContainer = document.createElement('div');
     this.attackContainer = document.createElement('div');
+    this.hpContainer = document.createElement('div');
+    this.playerHp = document.createElement('div');
+    this.canvasAttack = document.createElement('canvas');
     this.canvas = document.createElement('canvas');
 
 
@@ -18,14 +21,27 @@ class Player {
     this.collisionContainer.style.alignItems = 'center';
     this.collisionContainer.style.width = '15px';
     this.collisionContainer.style.height = '30px'
-    this.collisionContainer.style.border = '1px solid black'
-
     this.collisionContainer.style.left = `${left}px`;
     this.collisionContainer.style.top = `${top}px`;
     
 
     this.directionX = 0;
     this.directionY = 0;
+
+    //player Health
+    this.collisionContainer.appendChild(this.hpContainer);
+    this.hpContainer.style.position = 'absolute';
+    this.hpContainer.style.border = '0.5px solid black';
+    this.hpContainer.style.width = '20px';
+    this.hpContainer.style.height = '2px';
+    this.hpContainer.style.marginTop = '30px';
+
+    this.hpContainer.appendChild(this.playerHp);
+    this.playerHp.style.backgroundColor = 'darkred';
+    this.health = health;
+    this.playerHp.style.width = `${health}`;
+    this.playerHp.style.height = '100%';
+  
 
     //attack container
     this.collisionContainer.appendChild(this.attackContainer);
@@ -35,12 +51,23 @@ class Player {
     this.attackContainer.style.height = '25px';
     this.attackContainer.style.marginLeft = '90px';
     this.attackContainer.style.display = 'none';
-    this.attackInterval = null; //IntervalID
+    this.attackInterval; // Used in startAttackIntervalBelow
   
 
+    //canvas elements for animations
 
+    //attack animation
+/*     this.attackContainer.appendChild(this.canvasAttack);
+    this.ctxAttack = this.canvasAttack.getContext('2d');
+    this.canvasAttack.style.width = `100px`;
+    this.canvasAttack.style.height = `60px`;
+    this.canvasAttackWidth = this.canvas.width = 65;
+    this.canvasAttackHeight = this.canvas.height = 62;
+    this.attackAnim = new Image();
+    this.attackAnim.src = '/images/attack/atack.png';
+ */
 
-    //canvas element for animations
+    //character animation
     this.collisionContainer.appendChild(this.canvas);
     this.ctx = this.canvas.getContext('2d');
     this.canvas.style.width = `64px`;
@@ -54,7 +81,7 @@ class Player {
 
     this.frameX = 0;
     this.gameFrame = 0;
-    this.staggerFrames = 15;
+    this.staggerFrames = 9;
   };
 
 
@@ -67,6 +94,10 @@ class Player {
   updatePosition() {
     this.collisionContainer.style.left = `${this.left}px`;
     this.collisionContainer.style.top = `${this.top}px`;
+  }
+
+  updateHealthBar() {
+    this.playerHp.style.width = `${this.health}%`;
   }
 
   //attack Pattern
@@ -98,10 +129,9 @@ class Player {
       attackRect.top < enemyRect.bottom &&
       attackRect.bottom > enemyRect.top
     ) {
-      console.log('hit!')
+      return true;
     }
   }
-
 
 
   //collision with player logic
@@ -110,18 +140,36 @@ class Player {
     const playerRect = this.collisionContainer.getBoundingClientRect();
     const enemyRect = enemy.collisionContainer.getBoundingClientRect();
 
+
     if (
       playerRect.left < enemyRect.right &&
       playerRect.right > enemyRect.left &&
       playerRect.top < enemyRect.bottom &&
       playerRect.bottom > enemyRect.top
     ) {
-
+      return true;
     }
   }
 
 
+
   //animations for player character
+
+  //attack animations
+/*   animationAttack() {
+    this.ctxAttack.clearRect(0, 0, this.canvasAttackWidth, this.canvasAttackHeight);
+    this.ctxAttack.drawImage(this.attackAnim, this.frameX * 65, 0, 65, 62, 0, 0, 65, 62);
+
+    if(this.gameFrame % this.staggerFrames === 0) {
+      if(this.frameX < 4) this.frameX ++;
+      else this.frameX = 0;
+    }
+
+    requestAnimationFrame(this.animationAttack.bind(this))
+  } */
+
+
+  //character animations
   animationIdle() {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     this.ctx.drawImage(this.characterIdle, this.frameX * 64, 0, 64, 64, 0, 0, 64, 64);

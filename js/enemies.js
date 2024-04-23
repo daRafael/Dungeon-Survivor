@@ -1,8 +1,8 @@
 class Enemy {
-  constructor(gameScreen) {
+  constructor(gameScreen, left, top) {
     this.gameScreen = gameScreen;
-    this.left = Math.floor(Math.random() * 1000);
-    this.top = 300;
+    this.left = left;
+    this.top = top;
 
 
     this.collisionContainer = document.createElement('div');
@@ -15,7 +15,6 @@ class Enemy {
     this.collisionContainer.style.alignItems = 'center';
     this.collisionContainer.style.width = '16px';
     this.collisionContainer.style.height = '30px';
-    this.collisionContainer.style.border = '0.5px solid black';
 
     this.collisionContainer.style.left = `${this.left}px`;
     this.collisionContainer.style.top = `${this.top}px`;
@@ -24,6 +23,8 @@ class Enemy {
     this.directionX = 0;
     this.directionY = 0;
 
+    //enemy health
+    this.health = 100;
 
     //canvas element for animations
     this.collisionContainer.appendChild(this.canvas);

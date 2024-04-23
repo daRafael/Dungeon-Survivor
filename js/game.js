@@ -5,12 +5,16 @@ class Game {
     this.player = new Player (
       this.gameScreen,
       500,
-      500
+      500,
+      100
     );
     this.IntervalId;
     this.gameLoopFrenquency = Math.round(1000/60);
 
-    this.enemiesTop = [];
+    this.enemies = [];
+
+
+
   }
 
   start() {
@@ -23,37 +27,41 @@ class Game {
 
   gameLoop() {
     this.update();
-    console.log('in the game loop')
   }
 
   update() {
     this.player.move();
-    
+    this.enemySpawn(); // function dealing with spawns
+    this.didEnemiesCollide(); // collision enemy function
 
-    if (Math.random() > 0.98 && this.enemiesTop.length < 10) {
-      this.enemiesTop.push(new Enemy(this.gameScreen)); 
-    }
-
-
-    this.enemiesTop.forEach((enemy) => {
+    this.enemies.forEach((enemy) => {
       enemy.moveEnemy(this.player.top, this.player.left); //follow function
-      this.player.didPlayerCollide(enemy); // player collision function
-      this.player.didAttackHit(enemy); // attack collison function
-      enemy.animationWalk();
+
+      //player took damage
+      if(this.player.didPlayerCollide(enemy)) {
+        this.player.health -= 0.1;
+        this.player.updateHealthBar();
+      }
+      //attack hit enemy
+      if(this.player.didAttackHit(enemy)) {
+        enemy.health -= 5;
+        
+        if(enemy.health <= 0) {
+          enemy.collisionContainer.remove();
+          this.enemies.splice(this.enemies.indexOf(enemy), 1);
+        }
+      }
+
+      enemy.animationWalk();// enemy animation
     });
-
-
-
-
-    this.didEnemiesCollide();
   }
 
+  // Enemy Collision logic
   didEnemiesCollide() {
-
-     for(let i = 0; i < this.enemiesTop.length; i++) {
-      const enemy1 = this.enemiesTop[i];
-      for(let j = i + 1; j < this.enemiesTop.length; j++) {
-        const enemy2 = this.enemiesTop[j];
+     for(let i = 0; i < this.enemies.length; i++) {
+      const enemy1 = this.enemies[i];
+      for(let j = i + 1; j < this.enemies.length; j++) {
+        const enemy2 = this.enemies[j];
         const enemy1Rect = enemy1.collisionContainer.getBoundingClientRect();
         const enemy2Rect = enemy2.collisionContainer.getBoundingClientRect();
 
@@ -66,9 +74,30 @@ class Game {
         {
           enemy1.left += 0.2;
           enemy2.left -= 0.2;
+          enemy1.top += 0.2;
+          enemy2.top -= 0.2;
 
         }
       }
+    }
+  }
+
+  //Enemy spawn logic
+  enemySpawn() {
+    //enemies spawning from top
+    if (Math.random() > 0.98 && this.enemies.length < 30) {
+      this.enemies.push(
+        new Enemy(this.gameScreen,
+          Math.floor(Math.random() * 1000),
+          this.player.top - 300)); 
+    }
+    //enemies spawning from bottom
+    if (Math.random() > 0.98 && this.enemies.length < 30) {
+      this.enemies.push(
+        new Enemy(
+          this.gameScreen,
+          Math.floor(Math.random() * 1000), 
+          this.player.top + 300)); 
     }
   }
 

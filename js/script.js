@@ -35,6 +35,7 @@ window.onload = () => {
   };
 
   game.player.animationRun();
+/*   game.player.animationAttack(); */
 
   window.addEventListener('keydown', handleKeyDown);
 
