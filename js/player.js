@@ -54,7 +54,6 @@ class Player {
     //attack container
     this.collisionContainer.appendChild(this.attackContainer);
     this.attackContainer.style.position = 'absolute';
-    this.attackContainer.style.border = '2px solid black';
     this.attackContainer.style.width = '65px';
     this.attackContainer.style.height = '25px';
     this.attackContainer.style.marginLeft = '90px';
@@ -65,15 +64,17 @@ class Player {
     //canvas elements for animations
 
     //attack animation
-/*     this.attackContainer.appendChild(this.canvasAttack);
+    this.attackContainer.appendChild(this.canvasAttack);
     this.ctxAttack = this.canvasAttack.getContext('2d');
-    this.canvasAttack.style.width = `100px`;
-    this.canvasAttack.style.height = `60px`;
-    this.canvasAttackWidth = this.canvas.width = 65;
-    this.canvasAttackHeight = this.canvas.height = 62;
+    this.canvasAttack.style.width = `300px`;
+    this.canvasAttack.style.height = `150px`;
+    this.canvasAttackWidth = this.canvas.width = 120;
+    this.canvasAttackHeight = this.canvas.height = 120;
     this.attackAnim = new Image();
-    this.attackAnim.src = '/images/attack/atack.png';
- */
+    this.attackAnim.src = '/images/attack/Small slash FX/small_slash_2.png';
+    this.frameXAttack = 0;
+    this.staggerFramesAttack = 10;
+
 
     //character animation
     this.collisionContainer.appendChild(this.canvas);
@@ -135,7 +136,7 @@ class Player {
       this.showAttackContainer();
       setTimeout(() => {
         this.hideAttackContainer();
-      }, 200);
+      }, 400);
     }, 2000);
   }
 
@@ -145,6 +146,17 @@ class Player {
 
   hideAttackContainer() {
     this.attackContainer.style.display = 'none';
+  }
+
+
+  //attack right and left
+
+  attackRight() {
+    this.attackContainer.style.marginLeft = '90px';
+  }
+
+  attackLeft() {
+    this.attackContainer.style.marginLeft = '-90px';
   }
 
   //attack collision logic
@@ -185,17 +197,17 @@ class Player {
   //animations for player character
 
   //attack animations
-/*   animationAttack() {
+  animationAttack() {
     this.ctxAttack.clearRect(0, 0, this.canvasAttackWidth, this.canvasAttackHeight);
-    this.ctxAttack.drawImage(this.attackAnim, this.frameX * 65, 0, 65, 62, 0, 0, 65, 62);
+    this.ctxAttack.drawImage(this.attackAnim, this.frameXAttack * 65, 0, 65, 27, 0, 0, 65, 27);
 
-    if(this.gameFrame % this.staggerFrames === 0) {
-      if(this.frameX < 4) this.frameX ++;
-      else this.frameX = 0;
+    if (this.gameFrame % this.staggerFramesAttack === 0) {
+      if (this.frameXAttack < 3) this.frameXAttack ++;
+    else this.frameXAttack = 0;
     }
 
     requestAnimationFrame(this.animationAttack.bind(this))
-  } */
+  }
 
 
   //character animations

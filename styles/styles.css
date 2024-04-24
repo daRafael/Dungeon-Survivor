@@ -9,7 +9,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(31, 31, 31);
+  background-image: url('/images/background web/backgroundGif.gif');
+  background-repeat: repeat;
+  background-size: 100%;
 }
 
 .title-screen {
@@ -17,26 +19,27 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: end;
+  image-rendering: pixelated;
   background-image: url('/images/title-screen/DungeonSurvivor.png');
   background-repeat: no-repeat;
   background-size: cover;
   object-fit: cover;
-  width: 70%;
-  height: 70%;
+  width: 500px;
+  height: 500px;
 }
 
 .start-button {
   margin-bottom: 30px;
   margin-right: 10px;
-  padding: 20px 50px;
-  background-image: url('/images/start-button/45356.jpg');
+  padding: 21px 50px;
+  background-image: url('/images/title-screen/start-button/45356.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
 }
 
 .start-button:active{
-  padding: 15px 40px;
+  padding: 19px 45px;
 }
 
 .camera {
@@ -52,7 +55,7 @@ main {
   color: white;
   z-index: 1000;
   top: 10px;
-  left: 250px;
+  left: 225px;
   
 }
 
@@ -64,3 +67,102 @@ main {
   width: 1000px;
   position: relative;
 }
+
+.game-lost {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  z-index: 2000;
+  background-color: rgb(0, 0, 0, 0.33);
+  width: 500px;
+  height: 500px;
+}
+
+.game-won {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  z-index: 2000;
+  background-color: rgb(0, 0, 0, 0.33);
+  width: 500px;
+  height: 500px;
+}
+
+.game-over-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px;
+  background-color: rgba(147, 72, 68, 0.8);
+  color: rgb(252, 246, 221);
+  border: 4px solid rgb(169, 169, 0);
+  width: 400px;
+  height: 350px;
+  margin-top: 15px;
+  padding-top: 10px;
+}
+
+.title-over {
+  display: block;
+  width: 200px;
+  height: 100px;
+  margin-top: 5px;
+}
+
+.victory-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px;
+  background-color: rgba(147, 72, 68, 0.8);
+  color: rgb(252, 246, 221);
+  border: 4px solid rgb(169, 169, 0);
+  width: 400px;
+  height: 350px;
+  margin-top: 15px;
+  padding-top: 10px;
+}
+
+.victory-quote {
+  font-size: 35px;
+  margin-top: 25px;
+  margin-bottom: 12px;
+}
+
+.quote {
+  margin-top: 50px;
+}
+
+.retry-button {
+  margin-top: 10px;
+  padding: 25px 60px;
+  border: none;
+  background-image: url('/images/game-over/retry button/RetryButton.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.retry-button:active{
+  padding: 21px 50px;
+}
+
+.play-again-button {
+    margin-top: 10px;
+    padding: 25px 60px;
+    border: none;
+    background-image: url('/images/You Win/play-again-button/PlayAgainButton2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.play-again-button:active{
+  padding: 21px 50px;
+}
+
+

@@ -4,6 +4,11 @@ class Game {
     this.gameScreen = document.querySelector('.camera');
     this.map = document.querySelector('.map');
     this.timer = document.querySelector('.timer');
+    this.finalTime = document.querySelector('.final-time');
+    this.skeletonCounter = document.getElementsByClassName('skeleton-counter');
+    //gameover and victory screens queryselectors
+    this.gameOverScreen = document.querySelector('.game-lost');
+    this.gameWonScreen = document.querySelector('.game-won');
 
     // Player iteration
     this.player = new Player (
@@ -17,6 +22,7 @@ class Game {
     this.gameLoopFrenquency = Math.round(1000/60);
     //enemies Array
     this.enemies = [];
+    this.killCounter = 0;
     //timer
     this.timerID;
     this.timerCounter = 0;
@@ -46,7 +52,7 @@ class Game {
 
   startTimer() {
     this.timerID = setInterval(() => {
-      ++this.timerCounter;
+      this.timerCounter++;
       let minutes = Math.floor(this.timerCounter / 60);
       let seconds = this.timerCounter % 60;
       if(seconds < 10) {
@@ -76,11 +82,13 @@ class Game {
       }
       //attack hit enemy
       if(this.player.didAttackHit(enemy)) {
-        enemy.health -= 5;
+        enemy.health -= 3;
         
         if(enemy.health <= 0) {
           enemy.collisionContainer.remove();
           this.enemies.splice(this.enemies.indexOf(enemy), 1);
+          this.killCounter ++;
+          console.log(this.killCounter)
         }
       }
       enemy.animationWalk();// enemy animation
@@ -142,6 +150,13 @@ class Game {
     }
   }
 
+  skeletonCounterDisplay () {
+    for(let i = 0; i < this.skeletonCounter.length; i++) {
+      const counter = this.skeletonCounter[i];
+      counter.innerHTML = `${this.killCounter}`;
+    }
+  }
+
 
   //End Game
   endGameTimer() {
@@ -150,7 +165,10 @@ class Game {
       enemy.collisionContainer.remove();
     });
     this.gameOver = true;
-    this.map.style.display = 'none';
+    this.gameWonScreen.style.display = 'flex';
+
+    //skeleton kill counter
+    this.skeletonCounterDisplay();
   }
 
   endGameHp() {
@@ -160,8 +178,18 @@ class Game {
       enemy.collisionContainer.remove();
     });
     this.gameOver = true;
+    this.gameOverScreen.style.display = 'flex';
+    
+    //timer record
+    const minutes = Math.floor(this.timerCounter / 60);
+    const seconds = this.timerCounter % 60;
+
+    if(seconds < 10) {
+      this.finalTime.innerHTML = `0${minutes}:0${seconds}`
+    } else {
+      this.finalTime.innerHTML = `0${minutes}:${seconds}`
+    }
+    //skeleton kill counter
+    this.skeletonCounterDisplay();
   }
-
-
-
 }
