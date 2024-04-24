@@ -39,6 +39,7 @@ class Game {
     }, this.gameLoopFrenquency);
 
     this.player.startAttackInterval();
+    this.player.animationIdle();
     this.startTimer();
   }
 

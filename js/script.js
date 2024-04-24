@@ -16,7 +16,6 @@ window.onload = () => {
 
   function startGame() {
     game.start();
-    game.player.animationRun();
     game.player.animationAttack();
   }
 
@@ -24,39 +23,69 @@ window.onload = () => {
     location.reload();
   }
 
+
+  //handeling responsive keyboard movement
+  const possibleKeystrokes = [
+    "ArrowLeft",
+    "ArrowUp",
+    "ArrowRight",
+    "ArrowDown",
+  ];
+
+  const heldKeys = [];
+  
   function handleKeyDown() {
     const key = event.key;
-    const possibleKeystrokes = [
-      "ArrowLeft",
-      "ArrowUp",
-      "ArrowRight",
-      "ArrowDown",
-    ];
     
-    if (possibleKeystrokes.includes(key)) {
-        event.preventDefault();
-    
-        switch (key) {
-          case "ArrowLeft":
-              game.player.directionX = -1;
-              game.player.attackLeft();
-              break;
-          case "ArrowUp":
-              game.player.directionY = -1;
-              break;
-          case "ArrowRight":
-              game.player.directionX = 1;
-              game.player.attackRight();
-              break;
-          case "ArrowDown":
-              game.player.directionY = 1;
-              break;
-      }
+    if (possibleKeystrokes.includes(key) && !heldKeys.includes(key)) {
+        event.preventDefault(); // Prevents the browser defaul behavior for arrow keys
+        heldKeys.push(key);
+        updatePlayerDirection();
+        game.player.animationRun();
     }
 
   };
 
+  function handleKeyUp() {
+    const key = event.key;
+    const keyIndex = heldKeys.indexOf(key);
+    game.player.animationIdle();
+  
+    if(keyIndex !== -1) {
+      heldKeys.splice(keyIndex, 1);
+      updatePlayerDirection();
+      //reseting the frame counters to switch to animation idle
+      game.frame.frameX = 0;
+      game.player.gameFrame = 0;
+    }
+  }
+
+  function updatePlayerDirection() {
+    game.player.directionX = 0;
+    game.player.directionY = 0;
+
+    heldKeys.forEach((key) => {
+
+      switch (key) {
+        case 'ArrowLeft':
+          game.player.directionX -= 1;
+          game.player.collisionContainer.classList.add('flip-horizontal');
+          break;
+        case 'ArrowUp':
+          game.player.directionY -= 1;
+          break;
+        case 'ArrowRight':
+          game.player.directionX += 1;
+          game.player.collisionContainer.classList.remove('flip-horizontal');
+          break;
+        case 'ArrowDown':
+          game.player.directionY += 1;
+          break;
+      }
+    });
+  }
 
   window.addEventListener('keydown', handleKeyDown);
+  window.addEventListener('keyup', handleKeyUp);
 
 }

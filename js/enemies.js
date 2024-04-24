@@ -59,9 +59,11 @@ class Enemy {
   
       if(playerLeft > this.left) {
         this.left += 0.4;
+        this.collisionContainer.classList.remove('flip-horizontal');
       } 
       else if (playerLeft< this.left) {
         this.left -= 0.4;
+        this.collisionContainer.classList.add('flip-horizontal');
       }
 
       this.updatePosition();

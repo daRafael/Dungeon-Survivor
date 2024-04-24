@@ -68,6 +68,10 @@ main {
   position: relative;
 }
 
+.flip-horizontal {
+  transform: scaleX(-1);
+}
+
 .game-lost {
   display: none;
   flex-direction: column;

@@ -73,7 +73,7 @@ class Player {
     this.attackAnim = new Image();
     this.attackAnim.src = '/images/attack/Small slash FX/small_slash_2.png';
     this.frameXAttack = 0;
-    this.staggerFramesAttack = 10;
+    this.staggerFramesAttack = 9;
 
 
     //character animation
@@ -90,7 +90,7 @@ class Player {
 
     this.frameX = 0;
     this.gameFrame = 0;
-    this.staggerFrames = 9;
+    this.staggerFrames = 15;
   };
 
 
@@ -148,17 +148,6 @@ class Player {
     this.attackContainer.style.display = 'none';
   }
 
-
-  //attack right and left
-
-  attackRight() {
-    this.attackContainer.style.marginLeft = '90px';
-  }
-
-  attackLeft() {
-    this.attackContainer.style.marginLeft = '-90px';
-  }
-
   //attack collision logic
   didAttackHit(enemy) {
     const attackRect = this.attackContainer.getBoundingClientRect();
@@ -206,35 +195,53 @@ class Player {
     else this.frameXAttack = 0;
     }
 
-    requestAnimationFrame(this.animationAttack.bind(this))
+    requestAnimationFrame(this.animationAttack.bind(this));
   }
 
 
   //character animations
   animationIdle() {
-    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-    this.ctx.drawImage(this.characterIdle, this.frameX * 64, 0, 64, 64, 0, 0, 64, 64);
-    
-    if (this.gameFrame % this.staggerFrames === 0) {
-      if (this.frameX < 14) this.frameX ++;
-    else this.frameX = 0;
+    this.stopAnimationIdle();
+    const animate = () => {
+      this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      this.ctx.drawImage(this.characterIdle, this.frameX * 64, 0, 64, 64, 0, 0, 64, 64);
+      
+      if (this.gameFrame % this.staggerFrames === 0) {
+        if (this.frameX < 14) this.frameX ++;
+      else this.frameX = 0;
+      }
+
+      this.gameFrame++;
+      this.animationIdleID = requestAnimationFrame(animate);
     }
 
-    this.gameFrame++;
-    requestAnimationFrame(this.animationIdle.bind(this));
+    animate();
+  }
+    
+  stopAnimationIdle () {
+    cancelAnimationFrame(this.animationIdleID);
   }
 
   animationRun() {
-    this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-    this.ctx.drawImage(this.characterRun, this.frameX * this.canvasWidth, 0, 64, 64, 0, 0, 64, 64);
-                 
-    if (this.gameFrame % this.staggerFrames === 0) {
-      if (this.frameX < 7) this.frameX ++; 
-    else this.frameX = 0;
+    this.stopAnimationRun();
+    const animate = () => {
+      this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
+      this.ctx.drawImage(this.characterRun, this.frameX * this.canvasWidth, 0, 64, 64, 0, 0, 64, 64);
+                   
+      if (this.gameFrame % this.staggerFrames === 0) {
+        if (this.frameX < 7) this.frameX ++; 
+      else this.frameX = 0;
+      }
+  
+      this.gameFrame++;
+      this.animationRunID = requestAnimationFrame(animate);
     }
+    
+    animate();
+  }
 
-    this.gameFrame++;
-    requestAnimationFrame(this.animationRun.bind(this));
+  stopAnimationRun() {
+    cancelAnimationFrame(this.animationRunID);
   }
  
 };
