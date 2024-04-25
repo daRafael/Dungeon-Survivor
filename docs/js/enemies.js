@@ -35,7 +35,7 @@ class Enemy {
     this.canvasWidth = this.canvas.width = 150;
     this.canvasHeight = this.canvas.height = 150;
     this.enemyWalk = new Image();
-    this.enemyWalk.src = 'docs/images/skeleton-enemy/Monsters_Creatures_Fantasy/Skeleton/Walk.png';
+    this.enemyWalk.src = '/docs/images/skeleton-enemy/Monsters_Creatures_Fantasy/Skeleton/Walk.png';
 
     this.frameX = 0;
     this.gameFrame = 0;
