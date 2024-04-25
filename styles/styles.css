@@ -59,6 +59,15 @@ main {
   
 }
 
+.lvl {
+  position: absolute;
+  font-size: 20px;
+  color: white;
+  z-index: 1000;
+  top: 40px;
+  left: 228px;
+}
+
 .map {
   image-rendering: pixelated;
   background-image: url('/images/map-texture-SVR.png');

@@ -54,9 +54,6 @@ window.onload = () => {
     if(keyIndex !== -1) {
       heldKeys.splice(keyIndex, 1);
       updatePlayerDirection();
-      //reseting the frame counters to switch to animation idle
-      game.frame.frameX = 0;
-      game.player.gameFrame = 0;
     }
   }
 
@@ -70,6 +67,7 @@ window.onload = () => {
         case 'ArrowLeft':
           game.player.directionX -= 1;
           game.player.collisionContainer.classList.add('flip-horizontal');
+          game.player.hpContainer.classList.add('flip-horizontal');
           break;
         case 'ArrowUp':
           game.player.directionY -= 1;
@@ -77,6 +75,7 @@ window.onload = () => {
         case 'ArrowRight':
           game.player.directionX += 1;
           game.player.collisionContainer.classList.remove('flip-horizontal');
+          game.player.hpContainer.classList.remove('flip-horizontal');
           break;
         case 'ArrowDown':
           game.player.directionY += 1;

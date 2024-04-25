@@ -73,7 +73,7 @@ class Player {
     this.attackAnim = new Image();
     this.attackAnim.src = '/images/attack/Small slash FX/small_slash_2.png';
     this.frameXAttack = 0;
-    this.staggerFramesAttack = 9;
+    this.staggerFramesAttack = 1;
 
 
     //character animation
@@ -90,7 +90,7 @@ class Player {
 
     this.frameX = 0;
     this.gameFrame = 0;
-    this.staggerFrames = 15;
+    this.staggerFrames = 12;
   };
 
 
@@ -176,6 +176,21 @@ class Player {
       playerRect.right > enemyRect.left &&
       playerRect.top < enemyRect.bottom &&
       playerRect.bottom > enemyRect.top
+    ) {
+      return true;
+    }
+  }
+
+  didPlayerGetExp(exp) {
+    const playerRect = this.collisionContainer.getBoundingClientRect();
+    const expRect = exp.expContainer.getBoundingClientRect();
+
+
+    if (
+      playerRect.left < expRect.right &&
+      playerRect.right > expRect.left &&
+      playerRect.top < expRect.bottom &&
+      playerRect.bottom > expRect.top
     ) {
       return true;
     }

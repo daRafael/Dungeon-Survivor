@@ -15,6 +15,7 @@ class Enemy {
     this.collisionContainer.style.alignItems = 'center';
     this.collisionContainer.style.width = '16px';
     this.collisionContainer.style.height = '30px';
+    this.collisionContainer.style.zIndex = '10';
 
     this.collisionContainer.style.left = `${this.left}px`;
     this.collisionContainer.style.top = `${this.top}px`;
