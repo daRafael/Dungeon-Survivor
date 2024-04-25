@@ -35,6 +35,8 @@ class Game {
     this.timerCounter = 0;
     //GAME OVER
     this.gameOver = false;
+    //Soundtrack
+    this.soundtrack = new Audio('./docs/sound/Midnight-Castle.mp3')
   }
 
   start() {
@@ -48,6 +50,7 @@ class Game {
     this.player.startAttackInterval();
     this.player.animationIdle();
     this.startTimer();
+    this.soundtrack.play();
   }
 
   gameLoop() {
@@ -97,11 +100,13 @@ class Game {
       // VICTORY!
       if(this.timerCounter === 300) {
         this.endGameTimer();
+        this.soundtrack.pause();
       }
 
       //GAME OVER!
       if(this.player.health <= 0) {
         this.endGameHp();
+        this.soundtrack.pause();
       }
 
     });
@@ -137,14 +142,14 @@ class Game {
   enemySpawn() {
     //LVL 1
     //enemies spawning from top
-    if (Math.random() > 0.98 && this.enemies.length < 50) {
+    if (Math.random() > 0.98 && this.enemies.length < 40) {
       this.enemies.push(
         new Enemy(this.map,
           Math.floor(Math.random() * 1000),
           this.player.top - 300)); 
     }
     //enemies spawning from bottom
-    if (Math.random() > 0.98 && this.enemies.length < 50) {
+    if (Math.random() > 0.98 && this.enemies.length < 40) {
       this.enemies.push(
         new Enemy(
           this.map,
@@ -154,14 +159,14 @@ class Game {
     //LVL 2
     if (this.timerCounter === 60) {
       //enemies spawning from top
-      if (Math.random() > 0 && this.enemies.length < 70) {
+      if (Math.random() > 0 && this.enemies.length < 60) {
         this.enemies.push(
           new Enemy(this.map,
             Math.floor(Math.random() * 1000),
             this.player.top - 300)); 
       }
       //enemies spawning from bottom
-      if (Math.random() > 0 && this.enemies.length < 70) {
+      if (Math.random() > 0 && this.enemies.length < 60) {
         this.enemies.push(
           new Enemy(
             this.map,
@@ -172,14 +177,14 @@ class Game {
     //LVL 3
     if (this.timerCounter === 120) {
       //enemies spawning from top
-      if (Math.random() > 0 && this.enemies.length < 90) {
+      if (Math.random() > 0 && this.enemies.length < 80) {
         this.enemies.push(
           new Enemy(this.map,
             Math.floor(Math.random() * 1000),
             this.player.top - 300)); 
       }
       //enemies spawning from bottom
-      if (Math.random() > 0 && this.enemies.length < 90) {
+      if (Math.random() > 0 && this.enemies.length < 80) {
         this.enemies.push(
           new Enemy(
             this.map,
@@ -190,14 +195,14 @@ class Game {
     //LVL 4
     if (this.timerCounter === 180) {
       //enemies spawning from top
-      if (Math.random() > 0 && this.enemies.length < 110) {
+      if (Math.random() > 0 && this.enemies.length < 90) {
         this.enemies.push(
           new Enemy(this.map,
             Math.floor(Math.random() * 1000),
             this.player.top - 300)); 
       }
       //enemies spawning from bottom
-      if (Math.random() > 0 && this.enemies.length < 110) {
+      if (Math.random() > 0 && this.enemies.length < 90) {
         this.enemies.push(
           new Enemy(
             this.map,
@@ -208,14 +213,14 @@ class Game {
     //LVL 5
     if (this.timerCounter === 240) {
       //enemies spawning from top
-      if (Math.random() > 0 && this.enemies.length < 130) {
+      if (Math.random() > 0 && this.enemies.length < 110) {
         this.enemies.push(
           new Enemy(this.map,
             Math.floor(Math.random() * 1000),
             this.player.top - 300)); 
       }
       //enemies spawning from bottom
-      if (Math.random() > 0 && this.enemies.length < 130) {
+      if (Math.random() > 0 && this.enemies.length < 110) {
         this.enemies.push(
           new Enemy(
             this.map,
@@ -226,14 +231,14 @@ class Game {
     //LVL 6
     if (this.timerCounter === 280) {
       //enemies spawning from top
-      if (Math.random() > 0 && this.enemies.length < 150) {
+      if (Math.random() > 0 && this.enemies.length < 130) {
         this.enemies.push(
           new Enemy(this.map,
             Math.floor(Math.random() * 1000),
             this.player.top - 300)); 
       }
       //enemies spawning from bottom
-      if (Math.random() > 0 && this.enemies.length < 150) {
+      if (Math.random() > 0 && this.enemies.length < 130) {
         this.enemies.push(
           new Enemy(
             this.map,
