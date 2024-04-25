@@ -18,7 +18,7 @@ class Experience {
       this.expContainer.style.height = '8px';
 
       this.expContainer.appendChild(this.exp);
-      this.exp.src = '/docs/images/exp.png'
+      this.exp.src = './docs/images/exp.png'
       this.exp.style.width = '160%';
   
       this.expContainer.style.left = `${this.left}px`;
