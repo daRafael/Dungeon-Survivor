@@ -71,7 +71,7 @@ class Player {
     this.canvasAttackWidth = this.canvas.width = 120;
     this.canvasAttackHeight = this.canvas.height = 120;
     this.attackAnim = new Image();
-    this.attackAnim.src = '/docs/images/attack/Small slash FX/small_slash_2.png';
+    this.attackAnim.src = 'docs/images/attack/Small slash FX/small_slash_2.png';
     this.frameXAttack = 0;
     this.staggerFramesAttack = 1;
 
@@ -84,9 +84,9 @@ class Player {
     this.canvasWidth = this.canvas.width = 64;
     this.canvasHeight = this.canvas.height = 64;
     this.characterIdle = new Image();
-    this.characterIdle.src = '/docs/images/knight-character/Knight/noBKG_KnightIdle_strip.png';
+    this.characterIdle.src = 'docs/images/knight-character/Knight/noBKG_KnightIdle_strip.png';
     this.characterRun = new Image();
-    this.characterRun.src = '/docs/images/knight-character/Knight/noBKG_KnightRun_stripForJS.png';
+    this.characterRun.src = 'docs/images/knight-character/Knight/noBKG_KnightRun_stripForJS.png';
 
     this.frameX = 0;
     this.gameFrame = 0;
