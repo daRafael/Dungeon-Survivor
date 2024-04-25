@@ -71,7 +71,7 @@ class Player {
     this.canvasAttackWidth = this.canvas.width = 120;
     this.canvasAttackHeight = this.canvas.height = 120;
     this.attackAnim = new Image();
-    this.attackAnim.src = './docs/images/atack.png';
+    this.attackAnim.src = './docs/images/attack.png';
     this.frameXAttack = 0;
     this.staggerFramesAttack = 1;
 
