@@ -103,7 +103,7 @@ class Game {
       if(this.player.health <= 0) {
         this.endGameHp();
       }
-      console.log(this.playerDamage)
+
     });
   }
 
@@ -285,25 +285,25 @@ class Game {
       this.lvlDisplay.innerHTML = `Level ${this.lvlCounter}`;
     }
     //PLAYER LVL 7
-    if (this.exp === 38 && this.lvlCounter === 6) {
+    if (this.exp === 48 && this.lvlCounter === 6) {
       this.lvlCounter ++;
       this.playerDamage += 0.5;
       this.lvlDisplay.innerHTML = `Level ${this.lvlCounter}`;
     }
     //PLAYER LVL 8
-    if (this.exp === 46 && this.lvlCounter === 7) {
+    if (this.exp === 56 && this.lvlCounter === 7) {
       this.lvlCounter ++;
       this.playerDamage += 0.5
       this.lvlDisplay.innerHTML = `Level ${this.lvlCounter}`;
     }
     //PLAYER LVL 9
-    if (this.exp === 54 && this.lvlCounter === 8) {
+    if (this.exp === 62 && this.lvlCounter === 8) {
       this.lvlCounter ++;
       this.playerDamage += 0.5;
       this.lvlDisplay.innerHTML = `Level ${this.lvlCounter}`;
     }
     //PLAYER LVL 10
-    if(this.exp >= 62 && this.lvlCounter === 9) {
+    if(this.exp >= 70 && this.lvlCounter === 9) {
       this.lvlCounter ++;
       this.playerDamage += 0.5;
       this.lvlDisplay.innerHTML = `Level ${this.lvlCounter}`;
