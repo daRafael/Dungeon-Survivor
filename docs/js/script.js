@@ -41,7 +41,7 @@ window.onload = () => {
         event.preventDefault(); // Prevents the browser defaul behavior for arrow keys
         heldKeys.push(key);
         updatePlayerDirection();
-        game.player.animationRun();
+        game.player.isWalking = true;
     }
 
   };
@@ -49,11 +49,13 @@ window.onload = () => {
   function handleKeyUp() {
     const key = event.key;
     const keyIndex = heldKeys.indexOf(key);
-    game.player.animationIdle();
   
     if(keyIndex !== -1) {
       heldKeys.splice(keyIndex, 1);
       updatePlayerDirection();
+    }
+    if(heldKeys.length === 0) {
+      game.player.isWalking = false
     }
   }
 

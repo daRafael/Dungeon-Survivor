@@ -91,6 +91,13 @@ class Game {
     this.playerLvlUp();// Player LVL up system
     this.playerGotExp();
 
+    if (this.player.isWalking === true) {
+      this.player.animationRun();
+    } 
+    else {
+      this.player.animationIdle();
+    }
+
     this.enemies.forEach((enemy) => {
       this.attackKilledEnemy(enemy);
       enemy.moveEnemy(this.player.top, this.player.left); //follow function
@@ -346,7 +353,6 @@ class Game {
         exp.expContainer.remove();
         this.expArr.splice(this.expArr.indexOf(exp), 1);
         this.exp++;
-        console.log(this.exp);
       }
     });
   }

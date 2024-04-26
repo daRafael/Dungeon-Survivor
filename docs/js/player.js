@@ -36,6 +36,8 @@ class Player {
     this.directionX = 0;
     this.directionY = 0;
 
+    this.isWalking = false;
+
     //player Health
     this.collisionContainer.appendChild(this.hpContainer);
     this.hpContainer.style.position = 'absolute';
@@ -66,10 +68,10 @@ class Player {
     //attack animation
     this.attackContainer.appendChild(this.canvasAttack);
     this.ctxAttack = this.canvasAttack.getContext('2d');
-    this.canvasAttack.style.width = `300px`;
-    this.canvasAttack.style.height = `150px`;
-    this.canvasAttackWidth = this.canvas.width = 120;
-    this.canvasAttackHeight = this.canvas.height = 120;
+    this.canvasAttack.style.width = `122px`;
+    this.canvasAttack.style.height = `100px`;
+    this.canvasAttackWidth = this.canvasAttack.width = 120;
+    this.canvasAttackHeight = this.canvasAttack.height = 120;
     this.attackAnim = new Image();
     this.attackAnim.src = './docs/images/attack.png';
     this.frameXAttack = 0;
@@ -241,22 +243,21 @@ class Player {
     this.stopAnimationRun();
     const animate = () => {
       this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-      this.ctx.drawImage(this.characterRun, this.frameX * this.canvasWidth, 0, 64, 64, 0, 0, 64, 64);
-                   
+      this.ctx.drawImage(this.characterRun, this.frameX * 64, 0, 64, 64, 0, 0, 64, 64);
+                  
       if (this.gameFrame % this.staggerFrames === 0) {
         if (this.frameX < 7) this.frameX ++; 
       else this.frameX = 0;
       }
   
       this.gameFrame++;
-      this.animationRunID = requestAnimationFrame(animate);
+      this.animationRunID = requestAnimationFrame(animate)
     }
-    
     animate();
   }
 
   stopAnimationRun() {
     cancelAnimationFrame(this.animationRunID);
   }
- 
+
 };
