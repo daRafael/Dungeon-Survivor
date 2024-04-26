@@ -36,7 +36,7 @@ class Game {
     //GAME OVER
     this.gameOver = false;
     //Soundtrack
-    this.soundtrack = new Audio('./docs/sound/Midnight-Castle.mp3')
+    this.soundtrack = new Audio('./docs/sound/Midnight-Castle.mp3');
   }
 
   start() {
@@ -50,7 +50,13 @@ class Game {
     this.player.startAttackInterval();
     this.player.animationIdle();
     this.startTimer();
+    //playing soundtrack
     this.soundtrack.play();
+    //looping through soundtrack
+    this.soundtrack.addEventListener('ended', () => {
+      this.soundtrack.currentTime = 0;
+      this.soundtrack.play();
+    });
   }
 
   gameLoop() {
