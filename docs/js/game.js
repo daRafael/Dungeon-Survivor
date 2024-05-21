@@ -100,7 +100,7 @@ class Game {
 
     this.enemies.forEach((enemy) => {
       this.attackKilledEnemy(enemy);
-      enemy.moveEnemy(this.player.top, this.player.left); //follow function
+      enemy.moveEnemy(this.player.top, this.player.left, this.enemies); //follow function
       enemy.animationWalk();// enemy animation
 
       //player took damage
@@ -205,7 +205,8 @@ class Game {
             this.player.top + 300)); 
       }
     }
-    //LVL 4
+
+    //LVL 5
     if (this.timerCounter === 180) {
       //enemies spawning from top
       if (Math.random() > 0 && this.enemies.length < 90) {
@@ -223,35 +224,17 @@ class Game {
             this.player.top + 300)); 
       }
     }
-    //LVL 5
-    if (this.timerCounter === 240) {
-      //enemies spawning from top
-      if (Math.random() > 0 && this.enemies.length < 110) {
-        this.enemies.push(
-          new Enemy(this.map,
-            Math.floor(Math.random() * 1000),
-            this.player.top - 300)); 
-      }
-      //enemies spawning from bottom
-      if (Math.random() > 0 && this.enemies.length < 110) {
-        this.enemies.push(
-          new Enemy(
-            this.map,
-            Math.floor(Math.random() * 1000), 
-            this.player.top + 300)); 
-      }
-    }
     //LVL 6
-    if (this.timerCounter === 280) {
+    if (this.timerCounter === 200) {
       //enemies spawning from top
-      if (Math.random() > 0 && this.enemies.length < 130) {
+      if (Math.random() > 0 && this.enemies.length < 100) {
         this.enemies.push(
           new Enemy(this.map,
             Math.floor(Math.random() * 1000),
             this.player.top - 300)); 
       }
       //enemies spawning from bottom
-      if (Math.random() > 0 && this.enemies.length < 130) {
+      if (Math.random() > 0 && this.enemies.length < 100) {
         this.enemies.push(
           new Enemy(
             this.map,
